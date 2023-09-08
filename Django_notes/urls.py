@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from home.views import home
-from reg.views import reg
+from reg.views import reg, login_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,5 +25,7 @@ urlpatterns = [
     path('home/', home),
     path('reg/', reg),
     path('reg', reg),
+    path('login/', login_page),
+    path('login', login_page),
 
 ]

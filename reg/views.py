@@ -1,5 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from django.contrib.auth import authenticate, login
+#from models import User
+from reg.models import User
 
 
 def reg(request):
@@ -21,7 +23,8 @@ def reg(request):
         return HttpResponse("<h3>Passwords?</h3>")
     else:
         new_user = User()
-        new_user.create_user(username, full_name, email, password1)
+        new_user.create_user(username, first_name, last_name, email, password1)
+        print(new_user.username)
         return HttpResponse("<h3>Вы успешно зарегистрировались</h3>")
 
 
