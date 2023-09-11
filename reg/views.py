@@ -13,9 +13,9 @@ def reg(request):
     first_name = data.get('first_name')
     last_name = data.get('last_name')
     password1, password2 = data.get('password1'), data.get('password2')
-    if username is None or first_name is None or last_name is None:
+    if not username or not first_name or not last_name:
         return render(request, 'reg/reg_other.html', context={'response': 'Please enter your first and last names'})
-    elif email is None:
+    elif not email:
         return render(request, 'reg/reg_other.html', context={'response': 'We need to spam someone, provide us your email'})
     elif password1 is None or password2 is None:
         return render(request, 'reg/reg_other.html', context={'response': 'Password?'})
@@ -23,6 +23,7 @@ def reg(request):
         return render(request, 'reg/reg_other.html', context={'response': 'Passwords?'})
     else:
         new_user = User()
+        print(email)
         new_user.create_user(username, first_name, last_name, email, password1)
         return render(request, 'reg/reg_other.html', context={'response': 'Congrats! You can add your notes now!'})
 
