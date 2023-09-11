@@ -24,7 +24,6 @@ def reg(request):
     else:
         new_user = User()
         new_user.create_user(username, first_name, last_name, email, password1)
-        print(new_user.username)
         return render(request, 'reg/reg_other.html', context={'response': 'Congrats! You can add your notes now!'})
 
 

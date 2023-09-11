@@ -6,7 +6,7 @@
 
 {% block body %}
 
-    <h2 class="p-3">Welcome Back! Please Log in!</h2>
+    <h2 class="p-3">Welcome! Please Log in!</h2>
     <form method="post">
     {% csrf_token %}
         <div class="row p-3">
@@ -23,4 +23,7 @@
             <button type="submit" class="btn btn-primary btn-lg p-3 ">Submit</button>
         </div>
     </form>
+
+    <h2 class="p-3">Not registered yet?</h2>
+    <h3 class="p-3">You are welcome to <a href="/reg">register</a>!</h3>
 {% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <h3 class="p-3">Add your note</h3>
+{% endblock %}
+
+{% block body %}
+    <div class="p-3">
+        <form method="post">
+            {% csrf_token %}
+
+                <label for="exampleFormControlTextarea1" class="form-label">Your note</label>
+                <textarea class="form-control" name="note-text" rows="3"></textarea>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+{% endblock %}
