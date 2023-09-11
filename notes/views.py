@@ -16,5 +16,7 @@ def add_note(request):
 
 
 def view_notes(request):
-    print(Note.objects.filter(author=request.user.id))
-    return render(request, 'notes/notes.html', context={'notes': Note.objects.filter(author=request.user.id)})
+    if request.user.is_authenticated:
+        return render(request, 'notes/notes.html', context={'notes': Note.objects.filter(author=request.user.id)})
+    return render(request, './reg/reg_other.html',
+                  context={'response': "We're not properly introduced yet, please register or log in"})
