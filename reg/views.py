@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 #from models import User
 from reg.models import User
 
@@ -14,18 +14,18 @@ def reg(request):
     last_name = data.get('last_name')
     password1, password2 = data.get('password1'), data.get('password2')
     if username is None or first_name is None or last_name is None:
-        return HttpResponse('<h3>Nonames are not allowed</h3>')
+        return render(request, 'reg/reg_other.html', context={'response': 'Please enter your first and last names'})
     elif email is None:
-        return HttpResponse("<h3>We need to spam someone, provide us your email</h3>")
+        return render(request, 'reg/reg_other.html', context={'response': 'We need to spam someone, provide us your email'})
     elif password1 is None or password2 is None:
-        return HttpResponse("<h3>Password?</h3>")
+        return render(request, 'reg/reg_other.html', context={'response': 'Password?'})
     elif password1 != password2:
-        return HttpResponse("<h3>Passwords?</h3>")
+        return render(request, 'reg/reg_other.html', context={'response': 'Passwords?'})
     else:
         new_user = User()
         new_user.create_user(username, first_name, last_name, email, password1)
         print(new_user.username)
-        return HttpResponse("<h3>Вы успешно зарегистрировались</h3>")
+        return render(request, 'reg/reg_other.html', context={'response': 'Congrats! You can add your notes now!'})
 
 
 def login_page(request):
@@ -36,8 +36,13 @@ def login_page(request):
         try:
             user = authenticate(request, username=data['username'], password=data['password'])
             if user is None:
-                return HttpResponse("<h3>Пользователь с таким логином и паролем не найден</h3>")
+                return render(request, 'reg/reg_other.html', context={'response': 'There is no such user'})
             login(request, user)
-            return HttpResponse("<h3>Вы успешно авторизованы</h3>")
+            return render(request, 'reg/reg_other.html', context={'response': 'Yay! Welcome back!'})
         except KeyError:
-            return HttpResponse("<h3>Заполните все поля</h3>")
+            return render(request, 'reg/reg_other.html', context={'response': "Huh? We didn't get all the needed info, try again, pls"})
+
+
+def logout_page(request):
+    logout(request)
+    return render(request, 'reg/reg_other.html', context={'response': 'Good-bye, sweet prince'})

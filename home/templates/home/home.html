@@ -6,4 +6,7 @@
 
 {% block body %}
     <h1 class="p-3">Here you can add your notes, bruh</h1>
+    {% if last_name %}
+    <h3 class="p-3">Hello, {{ first_name }} {{ last_name }}</h3>
+    {% endif %}
 {% endblock %}
