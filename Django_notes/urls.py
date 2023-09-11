@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from home.views import home
 from reg.views import reg, login_page, logout_page
-from notes.views import add_note
+from notes.views import add_note, view_notes
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,5 +33,7 @@ urlpatterns = [
     path('home/login/', login_page),
     path('add_note/', add_note),
     path('add_note', add_note),
+    path('notes/', view_notes),
+    path('notes', view_notes),
 
 ]

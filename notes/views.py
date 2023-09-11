@@ -13,3 +13,8 @@ def add_note(request):
         new_note.save()
         return render(request, 'reg/reg_other.html', context={'response': "Congrats! You've added your note!"})
     return render(request, './reg/reg_other.html', context={'response': "We're not properly introduced yet, please register or log in"})
+
+
+def view_notes(request):
+    print(Note.objects.filter(author=request.user.id))
+    return render(request, 'notes/notes.html', context={'notes': Note.objects.filter(author=request.user.id)})
